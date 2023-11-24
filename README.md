@@ -32,7 +32,7 @@
 - **Documentación en el Código**: Comentarios y documentación de métodos y clases.
 
 ## Extras
-- **Diagramas de Componentes/Diseño**: Documentación de interacción entre componentes.
+- **Diagramas de Diseño**: Documentación de interacción entre componentes.
 
 - ![image](https://github.com/GabrielCU/TC2007B-exam/assets/70386592/d8bb1e8d-2c31-47a4-ae77-de2a10241448)
 
