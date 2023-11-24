@@ -4,21 +4,19 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.example.examen.data.network.models.Result
 import androidx.recyclerview.widget.RecyclerView
-import com.example.examen.data.network.models.CovidObject
-import com.example.examen.data.network.models.DatedResult
+import com.example.examen.data.network.models.Country
 import com.example.examen.databinding.ItemCovidCaseBinding
 import com.example.examen.framework.adapters.viewHolders.CovidViewHolder
 
 class CovidAdapter(): RecyclerView.Adapter<CovidViewHolder>() {
 	
 	
-	var data: List<DatedResult> = ArrayList()
+	var data: List<Country> = ArrayList()
 	lateinit var context: Context
 	
 	@SuppressLint("NotConstructor")
-	fun CovidAdapter(basicData: List<DatedResult>, context: Context) {
+	fun CovidAdapter(basicData: List<Country>, context: Context) {
 		this.data = basicData
 		this.context = context
 	}
@@ -33,7 +31,7 @@ class CovidAdapter(): RecyclerView.Adapter<CovidViewHolder>() {
 		return CovidViewHolder(binding)
 	}
 
-	fun updateData(newData: List<DatedResult>) {
+	fun updateData(newData: List<Country>) {
 		data = newData
 		notifyDataSetChanged()
 	}

@@ -1,13 +1,10 @@
 package com.example.examen.framework.views
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.examen.data.network.models.CovidObject
-import com.example.examen.data.network.models.DatedResult
-import com.example.examen.data.network.models.Result
+import com.example.examen.data.network.models.Country
 import com.example.examen.databinding.ActivityMainBinding
 import com.example.examen.framework.adapters.CovidAdapter
 import com.example.examen.framework.viewmodels.MainViewModel
@@ -24,7 +21,7 @@ class MainActivity: AppCompatActivity() {
 		
 		initializeBinding()
 		initializeObservers()
-		viewModel.getCovidList()
+		viewModel.getCovidList("2021-12-07")
 		
 	}
 	
@@ -34,12 +31,12 @@ class MainActivity: AppCompatActivity() {
 	}
 	
 	private fun initializeObservers() {
-		viewModel.covidLiveData.observe(this) { datedResultList -> 
-			setUpRecyclerView(datedResultList)
+		viewModel.covidLiveData.observe(this) { countries: List<Country> -> 
+			setUpRecyclerView(countries)
 		}
 	}
 
-	private fun setUpRecyclerView(dataForList: List<DatedResult>) {
+	private fun setUpRecyclerView(dataForList: List<Country>) {
 		binding.rvCovidList.setHasFixedSize(true)
 
 		val linearLayoutManager = LinearLayoutManager(
