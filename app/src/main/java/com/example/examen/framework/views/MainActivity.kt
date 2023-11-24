@@ -11,6 +11,8 @@ import com.example.examen.databinding.ActivityMainBinding
 import com.example.examen.framework.adapters.CovidAdapter
 import com.example.examen.framework.viewmodels.MainViewModel
 import com.example.examen.utils.GridSpacingItemDecoration
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity: AppCompatActivity() {
 	
@@ -24,15 +26,21 @@ class MainActivity: AppCompatActivity() {
 		
 		initializeBinding()
 		initializeObservers()
-		viewModel.getCovidList("2021-12-07")
-		
+		initializeCalendarView()
+		viewModel.getCovidList("2021-09-19")
 	}
-	
+
+
+
 	private fun initializeBinding() {
 		binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
+
+		val spacingInPixels = resources.getDimensionPixelSize(R.dimen.grid_layout_margin)
+		binding.rvCovidList.addItemDecoration(GridSpacingItemDecoration(2, spacingInPixels, true))
 	}
-	
+
+
 	private fun initializeObservers() {
 		viewModel.covidLiveData.observe(this) { countries: List<Country> -> 
 			setUpRecyclerView(countries)
@@ -42,13 +50,27 @@ class MainActivity: AppCompatActivity() {
 	private fun setUpRecyclerView(dataForList: List<Country>) {
 		binding.rvCovidList.setHasFixedSize(true)
 
-		val linearLayoutManager = GridLayoutManager(this, 2)
-		val spacingInPixels = resources.getDimensionPixelSize(R.dimen.grid_layout_margin)
-		binding.rvCovidList.addItemDecoration(GridSpacingItemDecoration(2, spacingInPixels, true))
+		val linearLayoutManager = GridLayoutManager(this, 2) 
 		binding.rvCovidList.layoutManager = linearLayoutManager
 		adapter.CovidAdapter(dataForList, this)
 		binding.rvCovidList.adapter = adapter
-	}	
-	
+	}
+
+	private fun initializeCalendarView() {
+		val calendar = Calendar.getInstance()
+
+		// Set the calendar to a specific date
+		calendar.set(2021, Calendar.SEPTEMBER, 19)
+		val specificDateMillis = calendar.timeInMillis
+
+		binding.calendarView.date = specificDateMillis
+
+		binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+			val selectedDate = Calendar.getInstance()
+			selectedDate.set(year, month, dayOfMonth)
+			val formattedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(selectedDate.time)
+			viewModel.getCovidList(formattedDate)
+		}
+	}
 	
 }
