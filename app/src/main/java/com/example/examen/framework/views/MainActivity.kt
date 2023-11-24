@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.examen.R
 import com.example.examen.data.network.models.Country
 import com.example.examen.databinding.ActivityMainBinding
@@ -12,6 +11,8 @@ import com.example.examen.framework.adapters.CovidAdapter
 import com.example.examen.framework.viewmodels.MainViewModel
 import com.example.examen.utils.GridSpacingItemDecoration
 import java.text.SimpleDateFormat
+import android.widget.SearchView
+
 import java.util.*
 
 class MainActivity: AppCompatActivity() {
@@ -27,6 +28,7 @@ class MainActivity: AppCompatActivity() {
 		initializeBinding()
 		initializeObservers()
 		initializeCalendarView()
+		setUpSearchView()
 		viewModel.getCovidList("2021-09-19")
 	}
 
@@ -42,7 +44,8 @@ class MainActivity: AppCompatActivity() {
 
 
 	private fun initializeObservers() {
-		viewModel.covidLiveData.observe(this) { countries: List<Country> -> 
+		viewModel.covidLiveData.observe(this) { countries: List<Country> ->
+			adapter.setData(countries)
 			setUpRecyclerView(countries)
 		}
 	}
@@ -52,7 +55,6 @@ class MainActivity: AppCompatActivity() {
 
 		val linearLayoutManager = GridLayoutManager(this, 2) 
 		binding.rvCovidList.layoutManager = linearLayoutManager
-		adapter.CovidAdapter(dataForList, this)
 		binding.rvCovidList.adapter = adapter
 	}
 
@@ -72,5 +74,18 @@ class MainActivity: AppCompatActivity() {
 			viewModel.getCovidList(formattedDate)
 		}
 	}
-	
+
+	private fun setUpSearchView() {
+		binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+			override fun onQueryTextSubmit(query: String?): Boolean {
+				query?.let { adapter.filter.filter(it) }
+				return false
+			}
+
+			override fun onQueryTextChange(newText: String?): Boolean {
+				newText?.let { adapter.filter.filter(it) }
+				return false
+			}
+		})
+	}
 }
