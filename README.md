@@ -4,20 +4,41 @@
 
 ### Android
 
-1. Arquitectura General: Clean Architecture y MVVM
-Model-View-ViewModel (MVVM): Separar la lógica de UI, lógica de negocio y modelos de datos.
-Clean Architecture: Asegurar la independencia del código de las interfaces de usuario, frameworks y agentes externos.
-2. Componentes Principales
-2.1. Capa de Presentación
+# Diseño de Componentes para Aplicación Móvil de Análisis de COVID-19
 
-Views: Interfaces de usuario para mostrar los datos (Listas, gráficos, etc.).
-ViewModels: Responsables de la transformación de los datos del modelo en valores que pueden ser mostrados en las Views.
-2.2. Capa de Dominio
+# Diseño de Componentes para Aplicación Móvil de Análisis de COVID-19
 
-Use Cases/Interactors: Contienen la lógica de negocio específica (p.ej., análisis de tendencias de COVID-19).
-Entities: Representan objetos de dominio puros (p.ej., CasoCovid).
-2.3. Capa de Datos
+## Arquitectura General
+- **Model-View-ViewModel (MVVM)**: Separación de lógica de UI, lógica de negocio y modelos de datos.
+- **Clean Architecture**: Independencia del código de las interfaces de usuario, frameworks y agentes externos.
 
-Repositories: Puentes entre la capa de dominio y la de datos. Abstraen la fuente de los datos.
-Data Sources: Fuentes de datos (APIs, Base de datos local, etc.).
-Models de Datos: Modelos específicos para manejar los datos provenientes de las fuentes de datos.
+## Componentes Principales
+
+### Capa de Presentación
+- **Views**: Interfaces de usuario para mostrar los datos (Listas, gráficos, etc.).
+- **ViewModels**: Transformación de los datos del modelo en valores para las Views.
+
+### Capa de Dominio
+- **Use Cases/Interactors**: Lógica de negocio específica (análisis de tendencias de COVID-19).
+- **Entities**: Objetos de dominio puros (ej., CasoCovid).
+
+### Capa de Datos
+- **Repositories**: Puentes entre la capa de dominio y la de datos.
+- **Data Sources**: Fuentes de datos (APIs, Base de datos local, etc.).
+- **Data Models**: Modelos para manejar los datos de las fuentes.
+
+## CI (Integración Continua)
+- **Pipelines de CI**: commits/Pull Requests.
+
+## Documentación y Estándares
+- **Documentación en el Código**: Comentarios y documentación de métodos y clases.
+
+## Extras
+- **Diagramas de Componentes/Diseño**: Documentación de interacción entre componentes.
+
+- ![image](https://github.com/GabrielCU/TC2007B-exam/assets/70386592/d8bb1e8d-2c31-47a4-ae77-de2a10241448)
+
+- ![image](https://github.com/GabrielCU/TC2007B-exam/assets/70386592/47e7129c-953e-47b4-a15e-e9cd59444776)
+
+
+
