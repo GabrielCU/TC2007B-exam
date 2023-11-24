@@ -94,6 +94,8 @@ dependencies {
 	// LiveData
 	implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
 
-	implementation("com.squareup.okhttp3:logging-interceptor:4.11.0") // replace with the latest version
+	implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
+
+	implementation("androidx.constraintlayout:constraintlayout:2.1.0")
 }

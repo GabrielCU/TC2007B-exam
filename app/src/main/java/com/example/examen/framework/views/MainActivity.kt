@@ -3,11 +3,14 @@ package com.example.examen.framework.views
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.examen.R
 import com.example.examen.data.network.models.Country
 import com.example.examen.databinding.ActivityMainBinding
 import com.example.examen.framework.adapters.CovidAdapter
 import com.example.examen.framework.viewmodels.MainViewModel
+import com.example.examen.utils.GridSpacingItemDecoration
 
 class MainActivity: AppCompatActivity() {
 	
@@ -39,12 +42,9 @@ class MainActivity: AppCompatActivity() {
 	private fun setUpRecyclerView(dataForList: List<Country>) {
 		binding.rvCovidList.setHasFixedSize(true)
 
-		val linearLayoutManager = LinearLayoutManager(
-			this,
-			LinearLayoutManager.VERTICAL,
-			false
-		)
-
+		val linearLayoutManager = GridLayoutManager(this, 2)
+		val spacingInPixels = resources.getDimensionPixelSize(R.dimen.grid_layout_margin)
+		binding.rvCovidList.addItemDecoration(GridSpacingItemDecoration(2, spacingInPixels, true))
 		binding.rvCovidList.layoutManager = linearLayoutManager
 		adapter.CovidAdapter(dataForList, this)
 		binding.rvCovidList.adapter = adapter
