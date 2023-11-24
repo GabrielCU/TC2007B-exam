@@ -5,6 +5,13 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
+/**
+ * Provides a configured instance of `CovidAPIService` for network operations.
+ *
+ * Utilizes `OkHttpClient` with `HttpLoggingInterceptor` for logging network requests.
+ * The `invoke` function sets up Retrofit with a base URL and a Gson converter.
+ */
 object NetworkModuleDI {
 
 	private val loggingInterceptor = HttpLoggingInterceptor().apply {

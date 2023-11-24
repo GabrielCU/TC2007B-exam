@@ -15,16 +15,22 @@ import android.widget.SearchView
 
 import java.util.*
 
+/**
+ * Activity for displaying COVID-19 statistics.
+ *
+ * Manages UI components for displaying and interacting with COVID-19 data,
+ * including a RecyclerView for the data, a CalendarView for selecting dates,
+ * and a SearchView for filtering results.
+ */
 class MainActivity: AppCompatActivity() {
-	
+
 	private lateinit var binding: ActivityMainBinding
 	private val adapter: CovidAdapter = CovidAdapter()
 	private val viewModel: MainViewModel by viewModels()
-	
+
 	override fun onCreate(savedInstanceState: Bundle?) {
-		
 		super.onCreate(savedInstanceState)
-		
+
 		initializeBinding()
 		initializeObservers()
 		initializeCalendarView()
@@ -32,8 +38,9 @@ class MainActivity: AppCompatActivity() {
 		viewModel.getCovidList("2021-09-19")
 	}
 
-
-
+	/**
+	 * Initializes the binding for the activity's views.
+	 */
 	private fun initializeBinding() {
 		binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
@@ -42,7 +49,9 @@ class MainActivity: AppCompatActivity() {
 		binding.rvCovidList.addItemDecoration(GridSpacingItemDecoration(2, spacingInPixels, true))
 	}
 
-
+	/**
+	 * Sets up observers for LiveData in the ViewModel.
+	 */
 	private fun initializeObservers() {
 		viewModel.covidLiveData.observe(this) { countries: List<Country> ->
 			adapter.setData(countries)
@@ -50,18 +59,25 @@ class MainActivity: AppCompatActivity() {
 		}
 	}
 
+	/**
+	 * Sets up the RecyclerView with a GridLayoutManager and the CovidAdapter.
+	 *
+	 * @param dataForList The data to be displayed in the RecyclerView.
+	 */
 	private fun setUpRecyclerView(dataForList: List<Country>) {
 		binding.rvCovidList.setHasFixedSize(true)
 
-		val linearLayoutManager = GridLayoutManager(this, 2) 
+		val linearLayoutManager = GridLayoutManager(this, 2)
 		binding.rvCovidList.layoutManager = linearLayoutManager
 		binding.rvCovidList.adapter = adapter
 	}
 
+	/**
+	 * Initializes the CalendarView and sets a date change listener to fetch data for the selected date.
+	 */
 	private fun initializeCalendarView() {
 		val calendar = Calendar.getInstance()
 
-		// Set the calendar to a specific date
 		calendar.set(2021, Calendar.SEPTEMBER, 19)
 		val specificDateMillis = calendar.timeInMillis
 
@@ -75,6 +91,9 @@ class MainActivity: AppCompatActivity() {
 		}
 	}
 
+	/**
+	 * Sets up the SearchView for filtering the RecyclerView data.
+	 */
 	private fun setUpSearchView() {
 		binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 			override fun onQueryTextSubmit(query: String?): Boolean {
