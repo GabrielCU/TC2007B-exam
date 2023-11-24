@@ -31,10 +31,5 @@ class CovidAdapter(): RecyclerView.Adapter<CovidViewHolder>() {
 		return CovidViewHolder(binding)
 	}
 
-	fun updateData(newData: List<Country>) {
-		data = newData
-		notifyDataSetChanged()
-	}
-
 	override fun getItemCount() = data.size
 }
