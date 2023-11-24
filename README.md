@@ -22,7 +22,7 @@
 
 ### Capa de Datos
 - **Repositories**: Puentes entre la capa de dominio y la de datos.
-- **Data Sources**: Fuentes de datos (APIs, Base de datos local, etc.).
+- **Data Sources**: Fuentes de datos (API).
 - **Data Models**: Modelos para manejar los datos de las fuentes.
 
 ## CI (Integración Continua)
