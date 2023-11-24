@@ -1,10 +1,8 @@
-# TC2007B-exam
+# Examen Argumentativo Práctico de Desarrollo Móvil
 
 ## Gabriel Cordova - A01781236
 
 ### Android
-
-# Diseño de Componentes para Aplicación Móvil de Análisis de COVID-19
 
 # Diseño de Componentes para Aplicación Móvil de Análisis de COVID-19
 
